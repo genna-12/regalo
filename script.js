@@ -1,5 +1,6 @@
 /**
  * Senior Frontend Script - Multi-Step Interactive Menu
+ * Optimized for iOS Touch Feedback
  */
 
 const CONFIG = [
@@ -43,7 +44,6 @@ const CONFIG = [
 let currentStep = 0;
 let userChoices = [];
 
-// Elementi DOM
 const bgContainer = document.getElementById('bgContainer');
 const welcomeScreen = document.getElementById('welcomeScreen');
 const formScreen = document.getElementById('formScreen');
@@ -53,6 +53,16 @@ const finalMenu = document.getElementById('finalMenu');
 const menuSummary = document.getElementById('menuSummary');
 const passwordInput = document.getElementById('passwordInput');
 const errorMsg = document.getElementById('errorMessage');
+
+// FIX PER IPHONE: Gestione tocco visiva forzata
+function attachTouchListeners(btn) {
+    btn.addEventListener('touchstart', () => btn.classList.add('is-pressing'), {passive: true});
+    btn.addEventListener('touchend', () => btn.classList.remove('is-pressing'), {passive: true});
+    btn.addEventListener('touchcancel', () => btn.classList.remove('is-pressing'), {passive: true});
+}
+
+// Inizializza feedback tocco sul bottone login esistente
+attachTouchListeners(document.getElementById('loginBtn'));
 
 // 1. Inizio - Tap su Benvenuto
 welcomeScreen.addEventListener('click', () => {
@@ -73,10 +83,10 @@ function showForm() {
     fadeIn(formScreen);
 }
 
-// 3. Verifica Password
+// 3. Verifica Password (Case Insensitive)
 function checkPassword() {
     const input = passwordInput.value.toLowerCase().trim();
-    const correct = CONFIG[currentStep].password;
+    const correct = CONFIG[currentStep].password.toLowerCase();
 
     if (input === correct) {
         vibrate(200);
@@ -99,6 +109,7 @@ function showA4() {
         const btn = document.createElement('button');
         btn.innerText = opt;
         btn.onclick = () => makeChoice(opt);
+        attachTouchListeners(btn); // Applica feedback touch
         optionButtons.appendChild(btn);
     });
 
@@ -157,10 +168,11 @@ function fadeIn(el) {
 }
 
 function vibrate(ms) {
+    // Nota: navigator.vibrate non è supportato su Safari iOS, 
+    // ma lo teniamo per compatibilità con altri browser mobile.
     if (navigator.vibrate) navigator.vibrate(ms);
 }
 
-// Evento Invio su Tastiera
 passwordInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') checkPassword();
 });
