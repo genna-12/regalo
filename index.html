@@ -9,9 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
-<body>
+<!-- ontouchstart="" serve a sbloccare lo stato :active su iOS -->
+<body ontouchstart="">
 
-    <!-- Sfondo Dinamico Cinematico Multi-Layer -->
     <div id="bgContainer" class="bg-blurred">
         <div class="bg-layer deep-black"></div>
         <div class="bg-layer nebula-gold-1"></div>
@@ -20,15 +20,12 @@
         <div class="bg-layer grain-overlay"></div>
     </div>
 
-    <!-- Container Centrale per Messaggi e Form -->
     <div id="uiOverlay" class="overlay">
-        <!-- Step Iniziale: Messaggio Benvenuto -->
         <div id="welcomeScreen" class="content-box active">
             <p class="intro-text">Questo è un menù creato appositamente da me.<br>Potrai scegliere tra due piatti per ogni pasto.<br>Per scoprire il menù dovrai completare gli indovinelli.</p>
             <p class="tap-to-continue">Tocca per iniziare</p>
         </div>
 
-        <!-- Form Indovinelli (Riutilizzabile) -->
         <div id="formScreen" class="content-box hidden">
             <h1 id="stepTitle" class="title">Titolo</h1>
             <p id="stepRiddle" class="subtitle">Indovinello...</p>
@@ -39,22 +36,18 @@
             <p id="errorMessage" class="error-msg">Risposta errata, riprova.</p>
         </div>
 
-        <!-- Riepilogo Finale -->
         <div id="finalMenu" class="content-box hidden">
             <h1 class="title">Il Tuo Menù</h1>
             <div id="menuSummary" class="summary-list"></div>
         </div>
     </div>
 
-    <!-- Contenuto A4 (Sfondo.png e Scelte) -->
     <main id="a4Reveal" class="hidden">
         <div class="a4-wrapper">
             <div class="a4-paper">
                 <img src="sfondo.png" alt="Sfondo Menù" class="a4-bg">
                 <div id="selectionArea" class="text-content">
-                    <div id="optionButtons" class="button-grid">
-                        <!-- Pulsanti generati via JS -->
-                    </div>
+                    <div id="optionButtons" class="button-grid"></div>
                 </div>
             </div>
         </div>
@@ -62,5 +55,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
