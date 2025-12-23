@@ -16,7 +16,7 @@ const CONFIG = [
         title: "Primi",
         riddle: "La band che ci ha fatto saltare e urlare al nostro PRIMO concerto",
         password: "greenday",
-        options: ["Risotto di Cioccolato", "Fior di Camomilla"]
+        options: ["Grani di Cacao", "Fior di Camomilla"]
     },
     {
         id: "secondi",
@@ -176,3 +176,4 @@ function vibrate(ms) {
 passwordInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') checkPassword();
 });
+
